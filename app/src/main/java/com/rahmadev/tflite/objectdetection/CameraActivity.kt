@@ -3,7 +3,6 @@ package com.rahmadev.tflite.objectdetection
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -17,8 +16,6 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.rahmadev.tflite.objectdetection.databinding.ActivityCameraBinding
 import org.tensorflow.lite.task.gms.vision.detector.Detection
-import java.lang.StringBuilder
-import java.text.NumberFormat
 import java.util.concurrent.Executors
 
 class CameraActivity : AppCompatActivity() {
@@ -50,21 +47,22 @@ class CameraActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onResults(results: MutableList<Detection>?, inferenceTime: Long) {
+                override fun onResults(
+                    results: MutableList<Detection>?,
+                    inferenceTime: Long,
+                    imageHeight: Int,
+                    imageWidth: Int,
+                ) {
                     runOnUiThread {
                         results?.let { it ->
                             if (it.isNotEmpty() && it[0].categories.isNotEmpty()) {
                                 println(it)
-                                val builder = StringBuilder()
-                                for (result in results) {
-                                    val displayResult = "${result.categories[0].label} " + NumberFormat.getPercentInstance().format(result.categories[0].score).trim()
-                                    builder.append("$displayResult \n")
-                                }
-                                binding.tvResult.text = builder.toString()
-                                binding.tvResult.visibility = View.VISIBLE
+                                binding.overlay.setResult(
+                                    results, imageHeight, imageWidth
+                                )
                                 binding.tvInferenceTime.text = "$inferenceTime ms"
                             } else {
-                                binding.tvResult.text = ""
+                                binding.overlay.clear()
                                 binding.tvInferenceTime.text = ""
                             }
                         }

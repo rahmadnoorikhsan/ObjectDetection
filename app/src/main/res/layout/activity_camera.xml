@@ -12,20 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
-        android:id="@+id/tvResult"
+    <com.rahmadev.tflite.objectdetection.Overlay
+        android:id="@+id/overlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#BFFFFFFF"
-        android:lines="3"
-        android:maxLines="3"
-        android:padding="16dp"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Result" />
+        android:layout_height="match_parent" />
 
     <TextView
         android:id="@+id/tvInferenceTime"
