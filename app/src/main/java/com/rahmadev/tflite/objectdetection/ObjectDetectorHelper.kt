@@ -9,12 +9,8 @@ import android.view.Surface
 import androidx.camera.core.ImageProxy
 import com.google.android.gms.tflite.client.TfLiteInitializationOptions
 import com.google.android.gms.tflite.gpu.support.TfLiteGpu
-import org.tensorflow.lite.DataType
-import org.tensorflow.lite.gpu.CompatibilityList
-import org.tensorflow.lite.support.common.ops.CastOp
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
-import org.tensorflow.lite.support.image.ops.ResizeOp
 import org.tensorflow.lite.support.image.ops.Rot90Op
 import org.tensorflow.lite.task.core.BaseOptions
 import org.tensorflow.lite.task.core.vision.ImageProcessingOptions
@@ -130,7 +126,7 @@ class ObjectDetectorHelper(
             results: MutableList<Detection>?,
             inferenceTime: Long,
             imageHeight: Int,
-            imageWidth: Int
+            imageWidth: Int,
         )
     }
 
